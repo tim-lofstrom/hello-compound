@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  hello-second:
+    build: hello-second
+    ports: 
+    - "8081:8081"
+
+  hello-spring:
+    build: hello-spring
+    ports: 
+    - "8080:8080"
+    - "8000:8000"
+
+  angular-tour-of-heroes:
+    build: angular-tour-of-heroes
+    ports:
+    - "80:80"
