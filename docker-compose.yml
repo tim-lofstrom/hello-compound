@@ -3,15 +3,37 @@ services:
   hello-second:
     build: hello-second
     ports: 
-    - "8081:8081"
+    - "127.0.0.1:8081:8081"
 
   hello-spring:
     build: hello-spring
     ports: 
-    - "8080:8080"
-    - "8000:8000"
+    - "127.0.0.1:8080:8080"
 
   angular-tour-of-heroes:
     build: angular-tour-of-heroes
     ports:
-    - "80:80"
+    - "127.0.0.1:80:80"
+
+  db:
+    build: database
+    ports:
+    - "127.0.0.1:5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+    - "127.0.0.1:81:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: timlof@lm.se
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - pgadmin_data:/pgadmin
+    depends_on:
+      - 'db'
+
+volumes: 
+  db_data:
+  pgadmin_data:
